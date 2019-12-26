@@ -116,7 +116,6 @@ class AttrDict(dict):
         self._owner = owner
         return ret
 
-
 class AttrList(AttrDict):
     """ A dictionary/list hybrid that exposes values as attributes. """
     def __iter__(self):
@@ -125,7 +124,7 @@ class AttrList(AttrDict):
     def append(self, item):
         if hasattr(item, '_parent'):
             item._parent = self._owner
-        if hasattr(item, 'name'):
+        if hasattr(item, 'name') and item.name != 'server':
             self[item.name] = item
         else:
             self[hash(item)] = item
